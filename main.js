@@ -1,31 +1,44 @@
-import * as THREE from 'https://cdn.skypack.dev/three';
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js';
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
+// Camera
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.z = 1;
+
+// Renderer
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.getElementById('three-canvas'),
-  alpha: true, // transparent background
+  canvas: document.querySelector('#bg'),
+  alpha: true,
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.z = 2;
+renderer.setPixelRatio(window.devicePixelRatio);
 
-// Geometry
-const geometry = new THREE.BoxGeometry();
-const material = new THREE.MeshStandardMaterial({ color: 0x0072ff });
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+// Star function
+function addStar() {
+  const geometry = new THREE.SphereGeometry(0.05, 24, 24);
+  const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const star = new THREE.Mesh(geometry, material);
 
-// Light
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(5, 5, 5);
-scene.add(light);
+  const [x, y, z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(100));
 
-// Animation loop
+  star.position.set(x, y, z);
+  scene.add(star);
+}
+
+Array(400).fill().forEach(addStar); // 400 stars
+
+// Animation
 function animate() {
   requestAnimationFrame(animate);
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
+  scene.rotation.y += 0.0005; // slow orbit effect
   renderer.render(scene, camera);
 }
 animate();

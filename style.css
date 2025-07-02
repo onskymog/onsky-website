@@ -1,96 +1,42 @@
-/* General Body Styles */
-body {
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-    color: #F0F0F0; /* Light gray for text, good contrast against space */
-    font-family: Arial, sans-serif; /* Fallback for content */
-
-    /* Space Background */
-    background-image: url('[https://source.unsplash.com/random/1920x1080/?space,galaxy](https://source.unsplash.com/random/1920x1080/?space,galaxy)'); /* A random space image from Unsplash */
-    /* IMPORTANT: For production, download a specific image and host it locally (e.g., 'assets/space.jpg')
-       and replace the URL above. Using random image URLs is not reliable for a live site. */
-
-    background-size: cover;          /* Make the background image cover the entire viewport */
-    background-position: center center; /* Center the background image */
-    background-attachment: fixed;    /* This makes the background fixed relative to the viewport,
-                                        so it appears to "move with you" as content scrolls */
-    background-repeat: no-repeat;    /* Prevent the image from repeating */
-    min-height: 150vh;               /* Ensure enough height for scrolling to demonstrate the effect */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: black;
+  color: white;
 }
 
-/* Optional: Semi-transparent overlay for better text readability */
-body::before {
-    content: "";
-    position: fixed; /* Fixed so it also covers the whole screen */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* A dark, semi-transparent overlay */
-    z-index: -1; /* Place it behind the content but above the background image */
+#hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
-/* Style for the "Join OnSky to be On Sky" sentence */
-.top-right-header-text {
-    position: fixed; /* Fixed positioning relative to the viewport */
-    top: 20px;       /* 20px from the top */
-    right: 20px;     /* 20px from the right */
-    z-index: 1000;   /* Ensure it stays on top of other content */
-    padding: 10px 20px;
-    /* background-color: rgba(0, 0, 0, 0.6); /* Optional: semi-transparent background for readability */
-    border-radius: 5px;
-    color: #00ff00; /* Bright green, common in programming/pixel themes */
-    text-shadow: 0 0 5px #00ff00; /* Optional: subtle glow effect */
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 10;
 }
 
-.top-right-header-text .onsky-tagline {
-    /* Apply the chosen Google Font */
-    font-family: 'Press Start 2P', cursive; /* For Minecraft/pixel font */
-    /* font-family: 'Fira Code', monospace; /* Uncomment this if you chose Fira Code */
-    font-size: 1.2em; /* Adjust size as needed */
-    white-space: nowrap; /* Prevent the text from wrapping */
+.overlay h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
-/* Basic content wrapper styling to give content space */
-.content-wrapper {
-    max-width: 800px;
-    margin: 80px auto 20px auto; /* Adjust top margin to account for fixed header text */
-    padding: 40px;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background for content */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3); /* Green glow effect for content box */
+.highlight {
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.intro-section h1 {
-    font-size: 2.5em;
-    color: #00C4CC; /* A bright, contrasting color */
-}
-
-.content-wrapper p {
-    margin-bottom: 1em;
-    line-height: 1.8;
-}
-
-/* Basic Responsive Adjustments */
-@media (max-width: 768px) {
-    .top-right-header-text {
-        top: 10px;
-        right: 10px;
-        font-size: 0.9em; /* Smaller font on smaller screens */
-        padding: 5px 10px;
-    }
-
-    .top-right-header-text .onsky-tagline {
-        font-size: 0.9em;
-    }
-
-    .content-wrapper {
-        margin-top: 60px; /* Adjust top margin for smaller screens */
-        padding: 20px;
-    }
-
-    .intro-section h1 {
-        font-size: 2em;
-    }
+canvas#bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
 }
